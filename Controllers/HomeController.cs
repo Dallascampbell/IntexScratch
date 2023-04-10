@@ -23,6 +23,14 @@ namespace IntexScratch.Controllers
             return View();
         }
 
+        public IActionResult BurialSummary()
+        {
+            int pageSize = 5;
+
+            
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
