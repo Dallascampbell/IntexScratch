@@ -85,6 +85,11 @@ namespace IntexScratch
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.Use(async (context, next) =>
+            {   context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'sef'");
+                await next();
+
+            });
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
