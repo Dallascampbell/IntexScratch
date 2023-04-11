@@ -1,6 +1,7 @@
 using IntexScratch.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -33,8 +34,27 @@ namespace IntexScratch
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            //services.AddControllersWithViews();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Added to make it require at least 10 characters and 5 unique characters
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 10;
+                options.Password.RequiredUniqueChars = 5;
+            });
+            services.AddControllersWithViews();
             services.AddRazorPages();
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+
+            });
 
             //services.AddAuthorization(options =>
             //{
@@ -65,7 +85,7 @@ namespace IntexScratch
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
