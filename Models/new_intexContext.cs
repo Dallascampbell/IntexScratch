@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace IntexScratch.Models
 {
-    public partial class new_intexContext : DbContext
+    public class new_intexContext : DbContext
     {
         public new_intexContext()
         {
@@ -66,7 +66,6 @@ namespace IntexScratch.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=new_intex;User Id=postgres;Password=password;");
             }
         }
@@ -1260,9 +1259,9 @@ namespace IntexScratch.Models
 
             modelBuilder.HasSequence("system$queuedtask_sequence_mxseq");
 
-            OnModelCreatingPartial(modelBuilder);
+           
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        
     }
 }

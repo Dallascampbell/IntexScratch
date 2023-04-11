@@ -7,5 +7,8 @@ namespace IntexScratch.Models.ViewModels
 {
     public class BurialSummaryViewModel
     {
+        public IQueryable<Burialmain> Burials { get; set; }
+        public PageInfo PageInfo { get; set; }
+
     }
 }

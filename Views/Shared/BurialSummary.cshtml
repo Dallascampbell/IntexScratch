@@ -1,0 +1,25 @@
+﻿
+
+@model Burialmain
+<div class="card card-outline-primary m-1 p-1">
+
+    @if (!string.IsNullOrEmpty(Model.Fieldbookexcavationyear))
+    {
+        <div class="bg-light p-1">
+            <span class="badge bg-info" style="float:right">
+                Year: @Model.Fieldbookexcavationyear.Substring(0, 4)
+            </span>
+        </div>
+    }
+
+
+    <ul>
+        <li>Burial Number: @Model.Burialnumber</li>
+        <li>North South: @Model.Squarenorthsouth</li>
+        <li>Hair Color: @Model.Haircolor</li>
+        <li>Depth: @Model.Depth Meters</li>
+    </ul>
+
+</div>
+
+

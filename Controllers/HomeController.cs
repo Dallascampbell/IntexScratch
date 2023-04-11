@@ -1,4 +1,5 @@
 ﻿using IntexScratch.Models;
+using IntexScratch.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,10 +13,13 @@ namespace IntexScratch.Controllers
 {
     public class HomeController : Controller
     {
+        private IBurialRepository repo;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBurialRepository temp)
         {
+            repo = temp;
             _logger = logger;
         }
 
@@ -25,12 +29,24 @@ namespace IntexScratch.Controllers
             return View();
         }
 
-        public IActionResult BurialSummary()
+        public IActionResult Burials(string filterType, int pageNum = 1)
         {
             int pageSize = 5;
+            var x = new BurialSummaryViewModel
+            {
+                Burials = repo.Burials
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
 
+                PageInfo = new PageInfo
+                {
+                    TotalNumBurials = (repo.Burials.Count()),
+                    BurialsPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
             
-            return View();
+            return View(x);
         }
 
         [AllowAnonymous]
