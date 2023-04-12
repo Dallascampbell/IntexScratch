@@ -85,6 +85,7 @@ namespace IntexScratch
             }
             else
             {
+               
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
@@ -96,12 +97,15 @@ namespace IntexScratch
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.Use(async (context, next) =>
-            {   context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'sef'");
-                await next();
-
-            });
+            
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; cookie-src 'self'");
+            //    await next();
+            //});
             app.UseCookiePolicy();
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

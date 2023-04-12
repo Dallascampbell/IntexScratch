@@ -66,7 +66,7 @@ namespace IntexScratch.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=new_intex;User Id=postgres;Password=password;");
+                optionsBuilder.UseNpgsql("Server=intex2.coyb1qqs7nnr.us-east-1.rds.amazonaws.com;Port=5432;Database=postgres;User Id=postgres;Password=BottleLaptopTableShoe;");
             }
         }
 

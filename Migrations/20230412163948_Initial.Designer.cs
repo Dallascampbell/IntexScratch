@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntexScratch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230411160225_initial")]
-    partial class initial
+    [Migration("20230412163948_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
