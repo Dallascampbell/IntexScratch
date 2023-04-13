@@ -113,7 +113,8 @@ namespace IntexScratch.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Authorize(Roles = "Admin")]
+        //Allow any authorized person to view the page
+        [Authorize]
         public IActionResult UnsupervisedAnalysis()
         {
             return View();
