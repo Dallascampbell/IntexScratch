@@ -79,13 +79,13 @@ namespace IntexScratch
                 options.MinimumSameSitePolicy = SameSiteMode.None;
 
             });
-            
-            //services.AddHsts(options => 
-            //{
-            //    options.Preload = true;
-            //    options.IncludeSubDomains = true;
-            //    options.MaxAge = TimeSpan.FromDays(365);
-            //});
+
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(365);
+            });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         
@@ -101,7 +101,7 @@ namespace IntexScratch
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.UseHsts();
+            app.UseHsts();
             //var options = new RewriteOptions()
             //.AddRedirectToHttps(StatusCodes.Status301MovedPermanently, 443);
             //app.UseRewriter(options);
