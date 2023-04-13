@@ -29,23 +29,75 @@ namespace IntexScratch.Controllers
             return View();
         }
 
-        public IActionResult Burials(string filterType, int pageNum = 1)
+        public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string estimatedStature = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
         {
             int pageSize = 5;
+            var query = repo.Burials.AsQueryable();
+
+            //if (textileColor != null)
+            //{
+            //    query = query.Where(b => b.TextileColor == textileColor);
+            //}
+
+            //if (textileStructure != null)
+            //{
+            //    query = query.Where(b => b.TextileStructure == textileStructure);
+            //}
+
+            if (sex != null)
+            {
+                query = query.Where(b => b.Sex == sex);
+            }
+
+            if (burialDepth != null)
+            {
+                query = query.Where(b => b.Depth == burialDepth);
+            }
+
+            //if (estimatedStature != null)
+            //{
+            //    query = query.Where(b => b.EstimatedStature == estimatedStature);
+            //}
+
+            if (ageAtDeath != null)
+            {
+                query = query.Where(b => b.Ageatdeath == ageAtDeath);
+            }
+
+            if (headDirection != null)
+            {
+                query = query.Where(b => b.Headdirection == headDirection);
+            }
+
+            if (burialId != null)
+            {
+                query = query.Where(b => b.Burialid == burialId);
+            }
+
+            //if (textileFunction != null)
+            //{
+            //    query = query.Where(b => b.TextileFunction == textileFunction);
+            //}
+
+            if (hairColor != null)
+            {
+                query = query.Where(b => b.Haircolor == hairColor);
+            }
+
             var x = new BurialSummaryViewModel
             {
-                Burials = repo.Burials
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
+                Burials = query
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumBurials = (repo.Burials.Count()),
+                    TotalNumBurials = query.Count(),
                     BurialsPerPage = pageSize,
                     CurrentPage = pageNum
                 }
             };
-            
+
             return View(x);
         }
 

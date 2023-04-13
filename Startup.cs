@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.OpenApi.Models;
+using Microsoft.ML.OnnxRuntime;
 
 namespace IntexScratch
 {
@@ -25,12 +27,19 @@ namespace IntexScratch
             Configuration = temp;
         }
 
-        
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SupervisedModelTest", Version = "v1" });
+            });
+            services.AddSingleton<InferenceSession>(
+                new InferenceSession("Model/decisiontreemod.onnx"));
+        
+        services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<new_intexContext>();
@@ -82,6 +91,8 @@ namespace IntexScratch
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SupervisedModelTest v1"));
             }
             else
             {
@@ -103,6 +114,7 @@ namespace IntexScratch
             //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; cookie-src 'self'");
             //    await next();
             //});
+
             app.UseCookiePolicy();
 
 
@@ -113,11 +125,15 @@ namespace IntexScratch
                     pattern: "Page{pageNum}",
                     defaults: new { Controller = "Home", action = "Burials", pageNum = 1 }
                     );
+       
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
+
+                
             });
         }
     }
