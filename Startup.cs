@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Rewrite;
+using System.Net;
 
 namespace IntexScratch
 {
@@ -30,6 +32,11 @@ namespace IntexScratch
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddHttpsRedirection(options =>
+            //{
+            //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+            //    options.HttpsPort = 44360;
+            //});
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -62,7 +69,13 @@ namespace IntexScratch
                 options.MinimumSameSitePolicy = SameSiteMode.None;
 
             });
-   
+            
+            //services.AddHsts(options => 
+            //{
+            //    options.Preload = true;
+            //    options.IncludeSubDomains = true;
+            //    options.MaxAge = TimeSpan.FromDays(365);
+            //});
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         
@@ -78,6 +91,11 @@ namespace IntexScratch
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.UseHsts();
+            //var options = new RewriteOptions()
+            //.AddRedirectToHttps(StatusCodes.Status301MovedPermanently, 443);
+            //app.UseRewriter(options);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -88,16 +106,17 @@ namespace IntexScratch
                
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                // app.UseHsts();
             }
-            app.UseHttpsRedirection();
+            //This is for redirecting Http requests to Https 
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+                            
             //app.Use(async (context, next) =>
             //{
             //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; cookie-src 'self'");
