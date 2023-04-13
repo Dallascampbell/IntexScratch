@@ -112,5 +112,11 @@ namespace IntexScratch.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [AllowAnonymous]
+        public IActionResult UnsupervisedAnalysis()
+        {
+            return View();
+        }
     }
 }
