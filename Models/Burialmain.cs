@@ -29,7 +29,7 @@ namespace IntexScratch.Models
         public string? Westtohead { get; set; }
         public string? Samplescollected { get; set; }
         public string? Area { get; set; }
-        public string? Burialid { get; set; }
+        public long? Burialid { get; set; }
         public string? Length { get; set; }
         public int? Burialnumber { get; set; }
         public string? Dataexpertinitials { get; set; }

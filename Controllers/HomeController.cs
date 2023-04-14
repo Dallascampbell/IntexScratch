@@ -74,10 +74,11 @@ namespace IntexScratch.Controllers
         [HttpPost]
         public IActionResult Edit(Burialmain b)
         {
+            //b.Burialid = Convert.ToUInt64(b.Burialid);
             _context.Update(b);
             _context.SaveChanges();
 
-            return View("Burials");
+            return View("Index");
         }
 
             public IActionResult Analysis()
@@ -216,7 +217,7 @@ namespace IntexScratch.Controllers
             _context.Burialmain.Remove(b);
             _context.SaveChanges();
 
-            return RedirectToAction("Burials");
+            return RedirectToAction("Index");
         }
     }
 }
