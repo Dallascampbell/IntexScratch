@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Add Record";
+}
+@model Burialmain
+
+<h1>Add a record</h1>
+<div>
+    <form method="post">
+        <div asp-validation-summary="All"></div>
+
+        <label asp-for="Squarenorthsouth">Squarenorthsouth:</label>
+        <input asp-for="Squarenorthsouth" /><br />
+
+        <label asp-for="Headdirection">Headdirection:</label>
+        <input asp-for="Headdirection" /><br />
+
+        <label asp-for="Sex">Sex:</label>
+        <input asp-for="Sex" /><br />
+
+        <label asp-for="Northsouth">northsouth:</label>
+        <input asp-for="Northsouth" /><br />
+
+        <label asp-for="Depth">depth:</label>
+        <input asp-for="Depth" /><br />
+
+        <label asp-for="Eastwest">eastwest:</label>
+        <input asp-for="Eastwest" /><br />
+
+        <label asp-for="Adultsubadult">adultsubadult:</label>
+        <input asp-for="Adultsubadult" /><br />
+
+        <label asp-for="Southtohead">southtohead:</label>
+        <input asp-for="Southtohead" /><br />
+
+        <label asp-for="Preservation">preservation:</label>
+        <input asp-for="Preservation" /><br />
+
+        <label asp-for="Text">text:</label>
+        <input asp-for="Text" /><br />
+
+        <label asp-for="Wrapping">wrapping:</label>
+        <input asp-for="Wrapping" /><br />
+
+        <label asp-for="Westtohead">westtohead:</label>
+        <input asp-for="Westtohead" /><br />
+
+        <label asp-for="Area">area:</label>
+        <input asp-for="Area" /><br />
+
+        <label asp-for="Length">length:</label>
+        <input asp-for="Length" /><br />
+
+        <label asp-for="Burialnumber">burialnumber:</label>
+        <input asp-for="Burialnumber" /><br />
+
+        <label asp-for="Westtofeet">westtofeet:</label>
+        <input asp-for="Westtofeet" /><br />
+
+        <label asp-for="Ageatdeath">ageatdeath:</label>
+        <input asp-for="Ageatdeath" /><br />
+
+        <label asp-for="Southtofeet ">southtofeet :</label>
+        <input asp-for="Southtofeet " /><br />
+
+
+        <button type="submit" class="btn btn-primary">Create Record</button>
+    </form>
+</div>
