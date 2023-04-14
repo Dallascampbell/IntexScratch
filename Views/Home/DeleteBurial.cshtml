@@ -3,10 +3,15 @@
 }
 @model Burialmain
 <h2>Confirm Deletion</h2>
-<h3>Are you sure you want to delete @Model.Id?</h3>
-
+<br />
+<br />
+<h3 class="alert alert-warning">
+    <strong>Caution!</strong>
+    Are you sure you want to delete record number: @Model.Id?
+</h3>
+<br />
 <form method="post" asp-action="DeleteBurial">
-    <button type="submit" class="btn btn-outline-primary" style="background-color: red; color: white">Delete</button>
+    <button type="submit" class="btn btn-warning">Delete</button>
     <a asp-controller="Home" asp-action="Burials" class="btn btn-outline-primary">Cancel</a>
 
     <input type="hidden" asp-for="Burialid" />
