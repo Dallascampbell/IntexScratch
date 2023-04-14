@@ -26,20 +26,24 @@ namespace IntexScratch.Controllers
             _context = x;
         }
 
+        [HttpGet]
+        public IActionResult Supervised()
+        {
+            return View();
+        }
         [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpGet]
 
-        public IActionResult Supervised()
         [HttpGet]
         public IActionResult AddBurial()
         {
             return View();
         }
+
 
         [HttpPost]
         public IActionResult AddBurial(Burialmain b)
@@ -59,23 +63,12 @@ namespace IntexScratch.Controllers
 
         }
         public IActionResult Analysis()
-
         {
             return View();
         }
 
 
-        //[HttpPost]
-        //public IActionResult Supervised(SupervisedResponse sr)
-        //{
-        //    return View("SupervisedConf", sr);
-        //}
-
-        public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
-
-
         public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string estimatedStature = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
-
         {
             int pageSize = 5;
 
@@ -174,23 +167,6 @@ namespace IntexScratch.Controllers
         public IActionResult UnsupervisedAnalysis()
         {
             return View();
-        }
-
-        [HttpGet]
-        public IActionResult DeleteBurial(long id)
-        {
-            var burial = _context.Burialmain.First(x => x.Id == id);
-
-            return View(burial);
-        }
-
-        [HttpPost]
-        public IActionResult DeleteBurial(Burialmain b)
-        {
-            _context.Burialmain.Remove(b);
-            _context.SaveChanges();
-
-            return RedirectToAction("Burials");
         }
     }
 }

@@ -39,7 +39,7 @@ namespace IntexScratch
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SupervisedModelTest", Version = "v1" });
             });
             services.AddSingleton<InferenceSession>(
-                new InferenceSession("Model/decisiontreemod.onnx"));
+                new InferenceSession("wwwroot/Model/decisiontreemod.onnx"));
         
 
             //services.AddHttpsRedirection(options =>

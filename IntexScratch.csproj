@@ -6,13 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Model\decisiontreemod.onnx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Model\decisiontreemod.onnx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Remove="wwwroot\Model\decisiontreemod.onnx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +29,12 @@
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\Model\decisiontreemod.onnx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 
