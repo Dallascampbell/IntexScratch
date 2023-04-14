@@ -13,14 +13,17 @@ namespace IntexScratch.Controllers
 {
     public class HomeController : Controller
     {
+        private new_intexContext _context { get; set; }
+
         private IBurialRepository repo;
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IBurialRepository temp)
+        public HomeController(ILogger<HomeController> logger, IBurialRepository temp, new_intexContext x)
         {
             repo = temp;
             _logger = logger;
+            _context = x;
         }
 
         [AllowAnonymous]
@@ -29,8 +32,36 @@ namespace IntexScratch.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AddBurial()
+        {
+            return View();
+        }
 
-        public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
+        [HttpPost]
+        public IActionResult AddBurial(Burialmain b)
+        {
+
+            if (ModelState.IsValid) //if Vlaid
+            {
+                _context.Add(b);
+                _context.SaveChanges();
+
+                return View("Index");
+            }
+            else //If invalid
+            {
+                return View(b);
+            }
+
+        }
+        public IActionResult Analysis()
+        {
+            return View();
+        }
+
+
+        public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string estimatedStature = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
         {
             int pageSize = 5;
 
@@ -93,12 +124,10 @@ namespace IntexScratch.Controllers
             {
                 query = query.Where(b => b.Haircolor == hairColor);
             }
-            var tString = hairColor;
-            // Construct the view model with the filtered results
+
             var x = new BurialSummaryViewModel
             {
                 Burials = query
-                    
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
 
@@ -126,7 +155,8 @@ namespace IntexScratch.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Authorize(Roles = "Admin")]
+        //Allow any authorized person to view the page
+        [Authorize]
         public IActionResult UnsupervisedAnalysis()
         {
             return View();
