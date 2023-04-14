@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace IntexScratch.Models
 {
     public partial class Burialmain
-    {
+    { 
         public long Id { get; set; }
         public string? Squarenorthsouth { get; set; }
         public string? Headdirection { get; set; }

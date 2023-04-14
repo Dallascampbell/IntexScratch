@@ -16,6 +16,16 @@ namespace IntexScratch.Models
             }
 
             public IQueryable<Burialmain> Burials => context.Burialmain;
-        
+
+            public void Add(Burialmain burial)
+            {
+                context.Burialmain.Add(burial);
+            }
+
+            public void Save()
+            {
+                context.SaveChanges();
+            }
+
     }
 }
