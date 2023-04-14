@@ -62,6 +62,7 @@ namespace IntexScratch.Controllers
             }
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin, Moderator, Basic")]
         public IActionResult Edit(long id)
         {
             var mummy = _context.Burialmain.First(x => x.Id == id);
@@ -69,6 +70,7 @@ namespace IntexScratch.Controllers
             return View("AddBurial", mummy);
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin, Moderator, Basic")]
         [HttpPost]
         public IActionResult Edit(Burialmain b)
         {
@@ -190,6 +192,7 @@ namespace IntexScratch.Controllers
             return View();
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin, Moderator, Basic")]
         [HttpGet]
 
         public IActionResult DeleteBurial(long id)
@@ -199,6 +202,7 @@ namespace IntexScratch.Controllers
             return View(burial);
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin, Moderator, Basic")]
         [HttpPost]
         public IActionResult DeleteBurial(Burialmain b)
         {
