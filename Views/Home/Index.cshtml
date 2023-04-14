@@ -3,40 +3,42 @@
 }
 
 <head>
-    <link rel="stylesheet" href="~/css/card.css" />
-    <link rel="stylesheet" href="~/css/card.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 
 <body>
+    <br />
     <div class="text-center">
-        <h1>Intex 2: Mummy TESTTime</h1>
-        <p>For over 25 years, we have been investigating the Fag el-Gamous cemetary in Egypt. We have unveiled
-        some incredible discoveries and have gained unique insights into history throughout our excavation work.
-        Explore our website to learn more about our findings. </p>
+        <h1>Intex 2: Mummy Time</h1>
+        <p>
+            For over 25 years, we have been investigating the renowned Fag el-Gamous cemetary in Egypt. We have unveiled
+            some incredible discoveries and have gained unique insights into history throughout our excavation work.
+            Explore our website to learn more about our findings.
+        </p>
     </div>
     <div class="card-box">
         <div class="card card--left">
-            <h1 class="card__header">MUMMY DATA</h1>
+            <h2 class="card__header">MUMMY INFORMATION</h2>
             <p class="card__text">
-                Interested in learning about the mummies we have uncovered since 2000? Click here.
+                Interested in learning about the mummies we have uncovered over the years? Click here to see our burial records.
             </p>
             <a class="card__link card__link--2" asp-area="" asp-controller="Home" asp-action="Burials">Burials</a>
         </div>
 
         <div class="card card--middle">
-            <h1 class="card__header">SUPERVISED MODEL</h1>
+            <h2 class="card__header">SUPERVISED MODEL</h2>
             <p class="card__text">
                 Want to predict the head direction of a buried mummy? Check out our supervised
-                prediction model here.
+                model to predict if a mummy's head is facing East or West.
             </p>
 
             <a class="card__link card__link--2" asp-area="" asp-controller="Home" asp-action="Supervised">Supervised</a>
 
         </div>
         <div class="card card--right">
-            <h1 class="card__header">UNSUPERVISED MODEL</h1>
+            <h2 class="card__header">UNSUPERVISED MODEL</h2>
             <p class="card__text">
-                Curious about other insights we have gathered? See our cluster analysis here.
+                Curious about other insights we have gathered? View our cluster analysis results and visualizations here.
             </p>
 
             <a class="card__link card__link--2" asp-area="" asp-controller="Home" asp-action="UnsupervisedAnalysis">Unsupervised</a>

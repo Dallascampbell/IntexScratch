@@ -19,10 +19,11 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
+  color: red;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -51,6 +52,67 @@ button.accept-policy {
   line-height: inherit;
 }
 
+h1 {
+    color: #814141;
+    font-family: Georgia;
+    font-weight: 700;
+    font-size: 2.75rem
+}
+
+h2 {
+    color: white;
+    font-family: Georgia;
+}
+
+p {
+    color: black;
+    font-family: Georgia
+}
+
+h3 {
+    color: #814141;
+    font-family: Georgia;
+    font-size: xx-large
+}
+
+h4 {
+    color: #814141;
+}
+
+form {
+    color: #814141;
+}
+
+ul {
+    color: #814141;
+}
+
+li {
+    color: #814141;
+}
+
+button {
+    padding: 0.6em 2em;
+    border-radius: 8px;
+    color: #FAF9F6;
+    background-color: #814141;
+    font-size: 1.1em;
+    border: 0;
+    align-content: center;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    padding: 0.6em 2em;
+    border-radius: 8px;
+    color: #FAF9F6;
+    background-color: #814141;
+    font-size: 1.1em;
+    border: 0;
+    align-content: center;
+    cursor: pointer;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -69,4 +131,94 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #FAF9F6;
+    min-height: 100vh;
+    box-sizing: border-box;
+    color: hsl(0, 0%, 95%);
+    font-weight: 400;
+    font-size: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.card-box {
+    height: 50rem;
+    width: 92rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr)
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 5rem
+}
+
+.card--left {
+    background-color: #D2B48C;
+    border-radius: 1rem 0 0 1rem
+}
+
+.card--middle {
+    background-color: #814141
+}
+
+.card--right {
+    background-color: #967969;
+    border-radius: 0 1rem 1rem 0
+}
+
+.card__icon {
+    height: 4.25rem
+}
+
+.card__header {
+    margin: 3rem 0;
+    font-family: Georgia;
+    font-weight: 700;
+    font-size: 2.75rem
+}
+
+.card__text {
+    line-height: 2.5rem;
+    color: hsla(0, 0%, 100%, 0.75)
+}
+
+.card__link:link, .card__link:visited {
+    margin-top: auto;
+    padding: 2rem 4rem;
+    border-radius: 5rem;
+    background-color: hsl(0, 0%, 95%);
+    text-decoration: none;
+    outline: 3px solid transparent
+}
+
+.card__link:hover, .card__link:focus {
+    background-color: inherit;
+    outline: 2px solid hsl(0, 0%, 95%)
+}
+
+.card__link--1:link, .card__link--1:visited {
+    color: hsl(31, 77%, 52%)
+}
+
+.card__link--2:link, .card__link--2:visited {
+    color: hsl(184, 100%, 22%)
+}
+
+.card__link--3:link, .card__link--3:visited {
+    color: hsl(179, 100%, 13%)
+}
+
+.card__link--1:hover, .card__link--1:focus, .card__link--2:hover, .card__link--2:focus, .card__link--3:hover, .card__link--3:focus {
+    color: hsl(0, 0%, 95%)
+}
+
 
