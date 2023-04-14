@@ -2,10 +2,11 @@
 @model IntexScratch.Models.ViewModels.SupervisedResponse
 
 <div class="text-center">
-    <h2>Predict the head direction of a mummy here!</h2>
+    <h1>Predict the Head Direction of a Mummy Here</h1>
 </div>
 <div class="row">
     <div class="col-6">
+        <!--create a form and have the post method link to our score action in the inference controller-->
         <form id="supervisedform" method="post" asp-controller="Inference" asp-action="Score">
             <div asp-validation-summary="All" class="text-warning"></div>
 
@@ -51,6 +52,9 @@
                     <option value=1>North</option>
                 </select>
             </div>
+
+            <!-- hidden fields are to account for our dummy variables in the model. our model is expecting
+            36 different json values, so we needed to account for each dummy column-->
 
             <div class="form-group">
                 <label for="eastweste">East West:</label>
@@ -153,304 +157,312 @@
         </div>
     </div>
 </div>
-    <script>
-        async function CallInference() {
-            // format the responses to account for dummies
 
-            if (document.getElementById("eastweste").value == 0) {
-                document.getElementById("eastwestw").value = 1
-            }
+<!-- implement javascript here so that we can pass the form submission to our API-->
 
-            else {
-                document.getElementById("eastwestw").value = 0
-            }
+<script>
+    async function CallInference() {
+        // format the responses to account for dummies
+        // a ton of conditional statements to ensure that none of the values we pass to the model are null
 
-            if (document.getElementById("adultsubadult").value == 0) {
-                document.getElementById("childsubchild").value = 1
-            }
-            else {
-                document.getElementById("childsubchild").value = 0;
-            }
-
-            if (document.getElementById("preservation").value == 1) {
-                document.getElementById("well").value = 0
-                document.getElementById("fair").value = 0
-                document.getElementById("poorly").value = 0
-                document.getElementById("badly").value = 0
-                document.getElementById("skeleton").value = 0
-                document.getElementById("deteriorated").value = 0
-            }
-
-            else if (document.getElementById("preservation").value == 2) {
-                document.getElementById("preservation").value = 0
-                document.getElementById("well").value = 1
-                document.getElementById("fair").value = 0
-                document.getElementById("poorly").value = 0
-                document.getElementById("badly").value = 0
-                document.getElementById("skeleton").value = 0
-                document.getElementById("deteriorated").value = 0
-            }
-
-            else if (document.getElementById("preservation").value == 3) {
-                document.getElementById("preservation").value = 0
-                document.getElementById("well").value = 0
-                document.getElementById("fair").value = 1
-                document.getElementById("poorly").value = 0
-                document.getElementById("badly").value = 0
-                document.getElementById("skeleton").value = 0
-                document.getElementById("deteriorated").value = 0
-            }
-
-            else if (document.getElementById("preservation").value == 4) {
-                document.getElementById("preservation").value = 0
-                document.getElementById("well").value = 0
-                document.getElementById("fair").value = 0
-                document.getElementById("poorly").value = 1
-                document.getElementById("badly").value = 0
-                document.getElementById("skeleton").value = 0
-                document.getElementById("deteriorated").value = 0
-            }
-
-            else if (document.getElementById("preservation").value == 5) {
-                document.getElementById("preservation").value = 0
-                document.getElementById("well").value = 0
-                document.getElementById("fair").value = 0
-                document.getElementById("poorly").value = 0
-                document.getElementById("badly").value = 1
-                document.getElementById("skeleton").value = 0
-                document.getElementById("deteriorated").value = 0
-            }
-
-            else if (document.getElementById("preservation").value == 6) {
-                document.getElementById("preservation").value = 0
-                document.getElementById("well").value = 0
-                document.getElementById("fair").value = 0
-                document.getElementById("poorly").value = 0
-                document.getElementById("badly").value = 0
-                document.getElementById("skeleton").value = 1
-                document.getElementById("deteriorated").value = 0
-            }
-
-            else {
-                document.getElementById("preservation").value = 0
-                document.getElementById("well").value = 0
-                document.getElementById("fair").value = 0
-                document.getElementById("poorly").value = 0
-                document.getElementById("badly").value = 0
-                document.getElementById("skeleton").value = 0
-                document.getElementById("deteriorated").value = 1
-            }
-
-            if (document.getElementById("wrapping").value == 1) {
-                document.getElementById("partial").value = 0
-                document.getElementById("bones").value = 0
-            }
-
-            else if (document.getElementById("wrapping").value == 2) {
-                document.getElementById("wrapping").value = 0
-                document.getElementById("partial").value = 1
-                document.getElementById("bones").value = 0
-            }
-
-            else {
-                document.getElementById("wrapping").value = 0
-                document.getElementById("partial").value = 0
-                document.getElementById("bones").value = 1
-            }
-
-            if (document.getElementById("haircolor").value == 1) {
-                document.getElementById("black").value = 0
-                document.getElementById("brownred").value = 0
-                document.getElementById("red").value = 0
-                document.getElementById("blond").value = 0
-            }
-
-            else if (document.getElementById("haircolor").value == 2) {
-                document.getElementById("haircolor").value = 0
-                document.getElementById("black").value = 1
-                document.getElementById("brownred").value = 0
-                document.getElementById("red").value = 0
-                document.getElementById("blond").value = 0
-            }
-
-            else if (document.getElementById("haircolor").value == 3) {
-                document.getElementById("haircolor").value = 0
-                document.getElementById("black").value = 0
-                document.getElementById("brownred").value = 1
-                document.getElementById("red").value = 0
-                document.getElementById("blond").value = 0
-            }
-
-            else if (document.getElementById("haircolor").value == 4) {
-                document.getElementById("haircolor").value = 0
-                document.getElementById("black").value = 0
-                document.getElementById("brownred").value = 0
-                document.getElementById("red").value = 1
-                document.getElementById("blond").value = 0
-            }
-
-            else {
-                document.getElementById("haircolor").value = 0
-                document.getElementById("black").value = 0
-                document.getElementById("brownred").value = 0
-                document.getElementById("red").value = 0
-                document.getElementById("blond").value = 1
-            }
-
-            if (document.getElementById("area").value == 1) {
-                document.getElementById("nnw").value = 0
-                document.getElementById("nw").value = 0
-                document.getElementById("se").value = 0
-                document.getElementById("sw").value = 0
-            }
-
-            else if (document.getElementById("area").value == 2) {
-                document.getElementById("area").value = 0
-                document.getElementById("nnw").value = 0
-                document.getElementById("nw").value = 1
-                document.getElementById("se").value = 0
-                document.getElementById("sw").value = 0
-            }
-
-            else if (document.getElementById("area").value == 2) {
-                document.getElementById("area").value = 0
-                document.getElementById("nnw").value = 0
-                document.getElementById("nw").value = 0
-                document.getElementById("se").value = 1
-                document.getElementById("sw").value = 0
-            }
-
-            else {
-                document.getElementById("area").value = 0
-                document.getElementById("nnw").value = 0
-                document.getElementById("nw").value = 0
-                document.getElementById("se").value = 0
-                document.getElementById("sw").value = 1
-            }
-
-            if (document.getElementById("ageatdeath").value == 1) {
-                document.getElementById("child").value = 0
-                document.getElementById("infant").value = 0
-                document.getElementById("newborn").value = 0
-            }
-
-            else if (document.getElementById("ageatdeath").value == 2) {
-                document.getElementById("ageatdeath").value = 0
-                document.getElementById("child").value = 1
-                document.getElementById("infant").value = 0
-                document.getElementById("newborn").value = 0
-            }
-
-            else if (document.getElementById("ageatdeath").value == 3) {
-                document.getElementById("ageatdeath").value = 0
-                document.getElementById("child").value = 0
-                document.getElementById("infant").value = 1
-                document.getElementById("newborn").value = 0
-            }
-
-            else {
-                document.getElementById("ageatdeath").value = 0
-                document.getElementById("child").value = 0
-                document.getElementById("infant").value = 0
-                document.getElementById("newborn").value = 1
-            }
-            // format the form data into json so the model in the API can understand it
-            var json = {
-                
-                northsouth_N: parseFloat(document.getElementById("northsouth").value),
-                eastwest_E: parseFloat(document.getElementById("eastweste").value),
-                eastwest_W: parseFloat(document.getElementById("eastwestw").value),
-                //adultsubadult_A: parseFloat(document.getElementById("adultsubadults").value), //this line is returning a null value 
-                adultsubadult_C: parseFloat(document.getElementById("childsubchild").value),
-                preservation_badlypreserved: parseFloat(document.getElementById("badly").value),
-                preservation_deteriorated: parseFloat(document.getElementById("deteriorated").value),
-                preservation_fair: parseFloat(document.getElementById("fair").value),
-                preservation_poorlypreserved: parseFloat(document.getElementById("poorly").value),
-                preservation_skeleton: parseFloat(document.getElementById("skeleton").value),
-                preservation_wellpreserved: parseFloat(document.getElementById("well").value),
-                preservation_wrapped: parseFloat(document.getElementById("preservation").value),
-                wrapping_B: parseFloat(document.getElementById("bones").value),
-                wrapping_H: parseFloat(document.getElementById("partial").value),
-                wrapping_W: parseFloat(document.getElementById("wrapping").value),
-                haircolor_A: parseFloat(document.getElementById("brownred").value),
-                haircolor_B: parseFloat(document.getElementById("haircolor").value),
-                haircolor_D: parseFloat(document.getElementById("blond").value),
-                haircolor_K: parseFloat(document.getElementById("black").value),
-                haircolor_R: parseFloat(document.getElementById("red").value),
-                area_NE: parseFloat(document.getElementById("area").value),
-                area_NNW: parseFloat(document.getElementById("nnw").value),
-                area_NW: parseFloat(document.getElementById("nw").value),
-                area_SE: parseFloat(document.getElementById("se").value),
-                area_SW: parseFloat(document.getElementById("sw").value),
-                ageatdeath_A: parseFloat(document.getElementById("ageatdeath").value),
-                ageatdeath_C: parseFloat(document.getElementById("child").value),
-                ageatdeath_I: parseFloat(document.getElementById("infant").value),
-                ageaatdeath_N: parseFloat(document.getElementById("newborn").value)
-            }
-            const squarenorthsouth = document.getElementById("squarenorthsouth").value;
-            const depth = document.getElementById("depth").value;
-            const southtohead = document.getElementById("southtohead").value;
-            const squareeastwest = document.getElementById("squareeastwest").value;
-            const westtohead = document.getElementById("westtohead").value;
-            const southtofeet = document.getElementById("southtofeet").value;
-            const westtofeet = document.getElementById("westtofeet").value;
-
-            if (Number.isInteger(parseInt(squarenorthsouth))) {
-                json.squarenorthsouth = parseFloat(squarenorthsouth);
-            }
-
-            if (Number.isInteger(parseInt(depth))) {
-                json.depth = parseFloat(depth);
-            }
-
-            if (Number.isInteger(parseInt(southtohead))) {
-                json.southtohead = parseFloat(southtohead);
-            }
-
-            if (Number.isInteger(parseInt(squareeastwest))) {
-                json.squareeastwest = parseFloat(squareeastwest);
-            }
-
-            if (Number.isInteger(parseInt(westtohead))) {
-                json.westtohead = parseFloat(westtohead);
-            }
-
-            if (Number.isInteger(parseInt(southtofeet))) {
-                json.southtofeet = parseFloat(southtofeet);
-            }
-
-            if (Number.isInteger(parseInt(westtofeet))) {
-                json.westtofeet = parseFloat(westtofeet);
-            }
-            
-            // serialize the newly created JSON object
-            var jsonString = JSON.stringify(json);
-            
-            try {
-                // send the POST request to the URL that houses our API
-                const response = await fetch("https://localhost:44360/predict", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: jsonString
-                })
-
-                // convert the response content as a string
-                var responseString = await response.text();
-
-                // do something with the response
-
-                responseString = JSON.parse(responseString);
-                document.getElementById("responseHead").innerHTML = responseString.predictedValue;
-
-            } catch (error) {
-                // handle the exception
-                console.error(error);
-            }
+        if (document.getElementById("eastweste").value == 0) {
+            document.getElementById("eastwestw").value = 1
         }
 
-        document.getElementById("predictionBtn").addEventListener("click", CallInference)
-    </script>
+        else {
+            document.getElementById("eastwestw").value = 0
+        }
+
+        if (document.getElementById("adultsubadult").value == 0) {
+            document.getElementById("childsubchild").value = 1
+        }
+        else {
+            document.getElementById("childsubchild").value = 0;
+        }
+
+        if (document.getElementById("preservation").value == 1) {
+            document.getElementById("well").value = 0
+            document.getElementById("fair").value = 0
+            document.getElementById("poorly").value = 0
+            document.getElementById("badly").value = 0
+            document.getElementById("skeleton").value = 0
+            document.getElementById("deteriorated").value = 0
+        }
+
+        else if (document.getElementById("preservation").value == 2) {
+            document.getElementById("preservation").value = 0
+            document.getElementById("well").value = 1
+            document.getElementById("fair").value = 0
+            document.getElementById("poorly").value = 0
+            document.getElementById("badly").value = 0
+            document.getElementById("skeleton").value = 0
+            document.getElementById("deteriorated").value = 0
+        }
+
+        else if (document.getElementById("preservation").value == 3) {
+            document.getElementById("preservation").value = 0
+            document.getElementById("well").value = 0
+            document.getElementById("fair").value = 1
+            document.getElementById("poorly").value = 0
+            document.getElementById("badly").value = 0
+            document.getElementById("skeleton").value = 0
+            document.getElementById("deteriorated").value = 0
+        }
+
+        else if (document.getElementById("preservation").value == 4) {
+            document.getElementById("preservation").value = 0
+            document.getElementById("well").value = 0
+            document.getElementById("fair").value = 0
+            document.getElementById("poorly").value = 1
+            document.getElementById("badly").value = 0
+            document.getElementById("skeleton").value = 0
+            document.getElementById("deteriorated").value = 0
+        }
+
+        else if (document.getElementById("preservation").value == 5) {
+            document.getElementById("preservation").value = 0
+            document.getElementById("well").value = 0
+            document.getElementById("fair").value = 0
+            document.getElementById("poorly").value = 0
+            document.getElementById("badly").value = 1
+            document.getElementById("skeleton").value = 0
+            document.getElementById("deteriorated").value = 0
+        }
+
+        else if (document.getElementById("preservation").value == 6) {
+            document.getElementById("preservation").value = 0
+            document.getElementById("well").value = 0
+            document.getElementById("fair").value = 0
+            document.getElementById("poorly").value = 0
+            document.getElementById("badly").value = 0
+            document.getElementById("skeleton").value = 1
+            document.getElementById("deteriorated").value = 0
+        }
+
+        else {
+            document.getElementById("preservation").value = 0
+            document.getElementById("well").value = 0
+            document.getElementById("fair").value = 0
+            document.getElementById("poorly").value = 0
+            document.getElementById("badly").value = 0
+            document.getElementById("skeleton").value = 0
+            document.getElementById("deteriorated").value = 1
+        }
+
+        if (document.getElementById("wrapping").value == 1) {
+            document.getElementById("partial").value = 0
+            document.getElementById("bones").value = 0
+        }
+
+        else if (document.getElementById("wrapping").value == 2) {
+            document.getElementById("wrapping").value = 0
+            document.getElementById("partial").value = 1
+            document.getElementById("bones").value = 0
+        }
+
+        else {
+            document.getElementById("wrapping").value = 0
+            document.getElementById("partial").value = 0
+            document.getElementById("bones").value = 1
+        }
+
+        if (document.getElementById("haircolor").value == 1) {
+            document.getElementById("black").value = 0
+            document.getElementById("brownred").value = 0
+            document.getElementById("red").value = 0
+            document.getElementById("blond").value = 0
+        }
+
+        else if (document.getElementById("haircolor").value == 2) {
+            document.getElementById("haircolor").value = 0
+            document.getElementById("black").value = 1
+            document.getElementById("brownred").value = 0
+            document.getElementById("red").value = 0
+            document.getElementById("blond").value = 0
+        }
+
+        else if (document.getElementById("haircolor").value == 3) {
+            document.getElementById("haircolor").value = 0
+            document.getElementById("black").value = 0
+            document.getElementById("brownred").value = 1
+            document.getElementById("red").value = 0
+            document.getElementById("blond").value = 0
+        }
+
+        else if (document.getElementById("haircolor").value == 4) {
+            document.getElementById("haircolor").value = 0
+            document.getElementById("black").value = 0
+            document.getElementById("brownred").value = 0
+            document.getElementById("red").value = 1
+            document.getElementById("blond").value = 0
+        }
+
+        else {
+            document.getElementById("haircolor").value = 0
+            document.getElementById("black").value = 0
+            document.getElementById("brownred").value = 0
+            document.getElementById("red").value = 0
+            document.getElementById("blond").value = 1
+        }
+
+        if (document.getElementById("area").value == 1) {
+            document.getElementById("nnw").value = 0
+            document.getElementById("nw").value = 0
+            document.getElementById("se").value = 0
+            document.getElementById("sw").value = 0
+        }
+
+        else if (document.getElementById("area").value == 2) {
+            document.getElementById("area").value = 0
+            document.getElementById("nnw").value = 0
+            document.getElementById("nw").value = 1
+            document.getElementById("se").value = 0
+            document.getElementById("sw").value = 0
+        }
+
+        else if (document.getElementById("area").value == 2) {
+            document.getElementById("area").value = 0
+            document.getElementById("nnw").value = 0
+            document.getElementById("nw").value = 0
+            document.getElementById("se").value = 1
+            document.getElementById("sw").value = 0
+        }
+
+        else {
+            document.getElementById("area").value = 0
+            document.getElementById("nnw").value = 0
+            document.getElementById("nw").value = 0
+            document.getElementById("se").value = 0
+            document.getElementById("sw").value = 1
+        }
+
+        if (document.getElementById("ageatdeath").value == 1) {
+            document.getElementById("child").value = 0
+            document.getElementById("infant").value = 0
+            document.getElementById("newborn").value = 0
+        }
+
+        else if (document.getElementById("ageatdeath").value == 2) {
+            document.getElementById("ageatdeath").value = 0
+            document.getElementById("child").value = 1
+            document.getElementById("infant").value = 0
+            document.getElementById("newborn").value = 0
+        }
+
+        else if (document.getElementById("ageatdeath").value == 3) {
+            document.getElementById("ageatdeath").value = 0
+            document.getElementById("child").value = 0
+            document.getElementById("infant").value = 1
+            document.getElementById("newborn").value = 0
+        }
+
+        else {
+            document.getElementById("ageatdeath").value = 0
+            document.getElementById("child").value = 0
+            document.getElementById("infant").value = 0
+            document.getElementById("newborn").value = 1
+        }
+
+         // format the form data into json so the model in the API can understand it
+
+        var json = {
+
+            northsouth_N: parseFloat(document.getElementById("northsouth").value),
+            eastwest_E: parseFloat(document.getElementById("eastweste").value),
+            eastwest_W: parseFloat(document.getElementById("eastwestw").value),
+            //adultsubadult_A: parseFloat(document.getElementById("adultsubadults").value), //this line is returning a null value
+            adultsubadult_C: parseFloat(document.getElementById("childsubchild").value),
+            preservation_badlypreserved: parseFloat(document.getElementById("badly").value),
+            preservation_deteriorated: parseFloat(document.getElementById("deteriorated").value),
+            preservation_fair: parseFloat(document.getElementById("fair").value),
+            preservation_poorlypreserved: parseFloat(document.getElementById("poorly").value),
+            preservation_skeleton: parseFloat(document.getElementById("skeleton").value),
+            preservation_wellpreserved: parseFloat(document.getElementById("well").value),
+            preservation_wrapped: parseFloat(document.getElementById("preservation").value),
+            wrapping_B: parseFloat(document.getElementById("bones").value),
+            wrapping_H: parseFloat(document.getElementById("partial").value),
+            wrapping_W: parseFloat(document.getElementById("wrapping").value),
+            haircolor_A: parseFloat(document.getElementById("brownred").value),
+            haircolor_B: parseFloat(document.getElementById("haircolor").value),
+            haircolor_D: parseFloat(document.getElementById("blond").value),
+            haircolor_K: parseFloat(document.getElementById("black").value),
+            haircolor_R: parseFloat(document.getElementById("red").value),
+            area_NE: parseFloat(document.getElementById("area").value),
+            area_NNW: parseFloat(document.getElementById("nnw").value),
+            area_NW: parseFloat(document.getElementById("nw").value),
+            area_SE: parseFloat(document.getElementById("se").value),
+            area_SW: parseFloat(document.getElementById("sw").value),
+            ageatdeath_A: parseFloat(document.getElementById("ageatdeath").value),
+            ageatdeath_C: parseFloat(document.getElementById("child").value),
+            ageatdeath_I: parseFloat(document.getElementById("infant").value),
+            ageaatdeath_N: parseFloat(document.getElementById("newborn").value)
+        }
+        const squarenorthsouth = document.getElementById("squarenorthsouth").value;
+        const depth = document.getElementById("depth").value;
+        const southtohead = document.getElementById("southtohead").value;
+        const squareeastwest = document.getElementById("squareeastwest").value;
+        const westtohead = document.getElementById("westtohead").value;
+        const southtofeet = document.getElementById("southtofeet").value;
+        const westtofeet = document.getElementById("westtofeet").value;
+
+        // validation in case the user does not have certain values for the input fields (ie: missing the depth value)
+
+        if (Number.isInteger(parseInt(squarenorthsouth))) {
+            json.squarenorthsouth = parseFloat(squarenorthsouth);
+        }
+
+        if (Number.isInteger(parseInt(depth))) {
+            json.depth = parseFloat(depth);
+        }
+
+        if (Number.isInteger(parseInt(southtohead))) {
+            json.southtohead = parseFloat(southtohead);
+        }
+
+        if (Number.isInteger(parseInt(squareeastwest))) {
+            json.squareeastwest = parseFloat(squareeastwest);
+        }
+
+        if (Number.isInteger(parseInt(westtohead))) {
+            json.westtohead = parseFloat(westtohead);
+        }
+
+        if (Number.isInteger(parseInt(southtofeet))) {
+            json.southtofeet = parseFloat(southtofeet);
+        }
+
+        if (Number.isInteger(parseInt(westtofeet))) {
+            json.westtofeet = parseFloat(westtofeet);
+        }
+
+        // serialize the newly created JSON object
+        var jsonString = JSON.stringify(json);
+
+        try {
+            // send the POST request to the URL that houses our API
+            const response = await fetch("https://localhost:44360/predict", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonString
+            })
+
+            // convert the response to a string, parse it, and print the response value (East or West) to the side of the form
+
+            var responseString = await response.text();
+
+            responseString = JSON.parse(responseString);
+            document.getElementById("responseHead").innerHTML = responseString.predictedValue;
+
+        } catch (error) {
+            // handle any errors here
+            console.error(error);
+        }
+    }
+
+    // event listener for when submit button is clicked
+    document.getElementById("predictionBtn").addEventListener("click", CallInference)
+</script>
 
 

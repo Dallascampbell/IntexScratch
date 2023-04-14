@@ -2,7 +2,7 @@
     ViewData["Title"] = "Delete Burial";
 }
 @model Burialmain
-<h2>Confirm Deletion</h2>
+<h1>Confirm Deletion</h1>
 <br />
 <br />
 <h3 class="alert alert-warning">
@@ -13,6 +13,5 @@
 <form method="post" asp-action="DeleteBurial">
     <button type="submit" class="btn btn-warning">Delete</button>
     <a asp-controller="Home" asp-action="Burials" class="btn btn-outline-primary">Cancel</a>
-
     <input type="hidden" asp-for="Burialid" />
 </form>
