@@ -51,6 +51,7 @@ namespace IntexScratch.Controllers
 
             if (ModelState.IsValid) //if Vlaid
             {
+
                 _context.Add(b);
                 _context.SaveChanges();
 

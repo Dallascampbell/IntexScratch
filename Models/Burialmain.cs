@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -8,8 +11,10 @@ using System.Collections.Generic;
 namespace IntexScratch.Models
 {
     public partial class Burialmain
-    { 
-        public long Id { get; set; }
+    {
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long? Id { get; set; }
         public string? Squarenorthsouth { get; set; }
         public string? Headdirection { get; set; }
         public string? Sex { get; set; }
