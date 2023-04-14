@@ -33,6 +33,9 @@ namespace IntexScratch.Controllers
         }
 
         [HttpGet]
+
+        public IActionResult Supervised()
+        [HttpGet]
         public IActionResult AddBurial()
         {
             return View();
@@ -77,7 +80,17 @@ namespace IntexScratch.Controllers
         }
 
 
+        //[HttpPost]
+        //public IActionResult Supervised(SupervisedResponse sr)
+        //{
+        //    return View("SupervisedConf", sr);
+        //}
+
+        public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
+
+
         public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string estimatedStature = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
+
         {
             int pageSize = 5;
 
@@ -179,6 +192,7 @@ namespace IntexScratch.Controllers
         }
 
         [HttpGet]
+
         public IActionResult DeleteBurial(long id)
         {
             var burial = _context.Burialmain.First(x => x.Id == id);
