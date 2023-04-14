@@ -21,8 +21,8 @@
     </ul>
 
     <span class="card-text">
-        <a asp-controller="Home" asp-action="Edit" asp-route-movieId="@Model.Burialid" class="btn btn-success btn-sm float-end">Edit</a>
-        <a asp-controller="Home" asp-action="Delete" asp-route-movieId="@Model.Burialid" class="btn btn-success btn-sm float-end" style="background-color: red; color: white">Delete</a>
+        <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success btn-sm float-end">Edit</a>
+        <a asp-controller="Home" asp-action="DeleteBurial" asp-route-id="@Model.Id" class="btn btn-success btn-sm float-end" style="background-color: red; color: white">Delete</a>
     </span>
 </div>
 

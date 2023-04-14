@@ -151,5 +151,22 @@ namespace IntexScratch.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult DeleteBurial(long id)
+        {
+            var burial = _context.Burialmain.First(x => x.Id == id);
+
+            return View(burial);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteBurial(Burialmain b)
+        {
+            _context.Burialmain.Remove(b);
+            _context.SaveChanges();
+
+            return RedirectToAction("Burials");
+        }
     }
 }
