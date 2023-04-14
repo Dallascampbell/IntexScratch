@@ -38,10 +38,6 @@ namespace IntexScratch.Controllers
         }
 
 
-        public IActionResult Supervised()
-        { 
-            return View();
-        }
         [HttpGet]
         public IActionResult AddBurial()
         {
