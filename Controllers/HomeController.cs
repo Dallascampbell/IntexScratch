@@ -29,11 +29,14 @@ namespace IntexScratch.Controllers
             return View();
         }
 
-        public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string estimatedStature = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
+
+        public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
         {
             int pageSize = 5;
-            var query = repo.Burials.AsQueryable();
 
+            var query = repo.Burials;
+
+            // Apply filters if they are not null
             //if (textileColor != null)
             //{
             //    query = query.Where(b => b.TextileColor == textileColor);
@@ -71,7 +74,14 @@ namespace IntexScratch.Controllers
 
             if (burialId != null)
             {
-                query = query.Where(b => b.Burialid == burialId);
+                int parsedBurialId;
+                bool success = Int32.TryParse(burialId, out parsedBurialId);
+
+                if (success)
+                {
+                    query = query.Where(b => b.Burialnumber == parsedBurialId);
+                }
+
             }
 
             //if (textileFunction != null)
@@ -83,10 +93,12 @@ namespace IntexScratch.Controllers
             {
                 query = query.Where(b => b.Haircolor == hairColor);
             }
-
+            var tString = hairColor;
+            // Construct the view model with the filtered results
             var x = new BurialSummaryViewModel
             {
                 Burials = query
+                    
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
 
@@ -100,6 +112,7 @@ namespace IntexScratch.Controllers
 
             return View(x);
         }
+
 
         [AllowAnonymous]
         public IActionResult Privacy()

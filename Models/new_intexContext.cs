@@ -69,7 +69,20 @@ namespace IntexScratch.Models
                 optionsBuilder.UseNpgsql("Server=intex2.coyb1qqs7nnr.us-east-1.rds.amazonaws.com;Port=5432;Database=postgres;User Id=postgres;Password=BottleLaptopTableShoe;");
             }
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 
+        //        if (string.IsNullOrEmpty(connectionString))
+        //        {
+        //            throw new InvalidOperationException("Could not find a connection string named 'DB_CONNECTION_STRING'.");
+        //        }
+
+        //        optionsBuilder.UseNpgsql(connectionString);
+        //    }
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Analysis>(entity =>
