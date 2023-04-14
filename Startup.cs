@@ -75,8 +75,9 @@ namespace IntexScratch
                 // This lambda determines whether user consent for non-essential 
                 // cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
-
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.ConsentCookie.SecurePolicy = CookieSecurePolicy.Always;
+                
 
             });
 
@@ -125,7 +126,7 @@ namespace IntexScratch
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-
+           
             app.UseAuthentication();
             app.UseAuthorization();
                             
