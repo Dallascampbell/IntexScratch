@@ -177,6 +177,7 @@ namespace IntexScratch.Controllers
         }
 
         [HttpGet]
+
         public IActionResult DeleteBurial(long id)
         {
             var burial = _context.Burialmain.First(x => x.Id == id);
