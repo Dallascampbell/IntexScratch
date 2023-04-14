@@ -140,17 +140,19 @@ namespace IntexScratch
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "Paging",
-                    pattern: "Page{pageNum}",
-                    defaults: new { Controller = "Home", action = "Burials", pageNum = 1 }
-                    );
+                //endpoints.MapControllerRoute(
+                //    name: "Paging",
+                //    pattern: "Page{pageNum}",
+                //    defaults: new { Controller = "Home", action = "Burials", pageNum = 1 }
+                //    );
        
 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapDefaultControllerRoute();
+
                 endpoints.MapRazorPages();
 
                 

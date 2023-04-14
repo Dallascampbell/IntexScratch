@@ -33,6 +33,9 @@ namespace IntexScratch.Controllers
         }
 
         [HttpGet]
+
+        public IActionResult Supervised()
+        [HttpGet]
         public IActionResult AddBurial()
         {
             return View();
@@ -56,16 +59,29 @@ namespace IntexScratch.Controllers
 
         }
         public IActionResult Analysis()
+
         {
             return View();
         }
 
 
+        //[HttpPost]
+        //public IActionResult Supervised(SupervisedResponse sr)
+        //{
+        //    return View("SupervisedConf", sr);
+        //}
+
+        public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
+
+
         public IActionResult Burials(int pageNum = 1, string textileColor = null, string textileStructure = null, string sex = null, string burialDepth = null, string estimatedStature = null, string ageAtDeath = null, string headDirection = null, string burialId = null, string textileFunction = null, string hairColor = null)
+
         {
             int pageSize = 5;
-            var query = repo.Burials.AsQueryable();
 
+            var query = repo.Burials;
+
+            // Apply filters if they are not null
             //if (textileColor != null)
             //{
             //    query = query.Where(b => b.TextileColor == textileColor);
@@ -103,7 +119,14 @@ namespace IntexScratch.Controllers
 
             if (burialId != null)
             {
-                query = query.Where(b => b.Burialid == burialId);
+                int parsedBurialId;
+                bool success = Int32.TryParse(burialId, out parsedBurialId);
+
+                if (success)
+                {
+                    query = query.Where(b => b.Burialnumber == parsedBurialId);
+                }
+
             }
 
             //if (textileFunction != null)
@@ -133,6 +156,7 @@ namespace IntexScratch.Controllers
             return View(x);
         }
 
+
         [AllowAnonymous]
         public IActionResult Privacy()
         {
@@ -153,20 +177,21 @@ namespace IntexScratch.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(long id)
-        {
-            var mummy = _context.Burialmain.First(x => x.Id == id);
 
-            return View("AddBurial", mummy);
+        public IActionResult DeleteBurial(long id)
+        {
+            var burial = _context.Burialmain.First(x => x.Id == id);
+
+            return View(burial);
         }
 
         [HttpPost]
-        public IActionResult Edit(Burialmain b)
+        public IActionResult DeleteBurial(Burialmain b)
         {
-            _context.Update(b);
+            _context.Burialmain.Remove(b);
             _context.SaveChanges();
 
-            return View("Burials");
+            return RedirectToAction("Burials");
         }
     }
 }

@@ -16,13 +16,13 @@
     <ul>
         <li>Burial Number: @Model.Burialnumber</li>
         <li>North South: @Model.Squarenorthsouth</li>
-        <li>Hair Color: @Model.Haircolor</li>
-        <li>Depth: @Model.Depth Meters</li>
+        <li>Sex: @Model.Sex</li>
+        <li>Age at Death: @Model.Ageatdeath </li>
     </ul>
 
     <span class="card-text">
-        <a asp-controller="Home" asp-action="Edit" asp-route-id= "@Model.Id" class="btn btn-success btn-sm float-end">Edit</a>
-        <a asp-controller="Home" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-success btn-sm float-end" style="background-color: red; color: white">Delete</a>
+        <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success btn-sm float-end">Edit</a>
+        <a asp-controller="Home" asp-action="DeleteBurial" asp-route-id="@Model.Id" class="btn btn-success btn-sm float-end" style="background-color: red; color: white">Delete</a>
     </span>
 </div>
 

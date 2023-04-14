@@ -8,5 +8,8 @@ namespace IntexScratch.Models
     public interface IBurialRepository
     {
         IQueryable<Burialmain> Burials { get; }
+
+        void Add(Burialmain burial);
+        void Save();
     }
 }

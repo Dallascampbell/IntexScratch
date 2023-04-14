@@ -4,41 +4,64 @@
     <div class="row">
         <div class="col-md-3">
             <!-- filter form side menu -->
-            <form id="filter-form">
+            <form id="filter-form" action="@Url.Action("Burials")">
                 <h4>Filter Burials</h4>
-                <label for="textile-color">Textile Color:</label>
-                <input type="text" id="textile-color" name="textile-color">
-
-                <label for="textile-structure">Textile Structure:</label>
-                <input type="text" id="textile-structure" name="textile-structure"><br /><br />
 
                 <label for="sex">Sex:</label>
                 <select id="sex" name="sex">
                     <option value="">--Select--</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
                 </select>
                 <br />
-                <label for="burial-depth">Burial Depth:</label>
-                <input type="number" id="burial-depth" name="burial-depth">
+                <label for="hairColor">Hair Color:</label>
+                <select id="hairColor" name="hairColor">
+                    <option value="">--Select--</option>
+                    <option value="B">Brown</option>
+                    <option value="R">Red</option>
+                    <option value="K">Black</option>
+                    <option value="A">Brown/Red</option>
+                    <option value="D">Blonde</option>
+                    <option value="">Unknown</option>
+                </select><br />
+
+                <label for="ageAtDeath">Age at Death:</label>
+                <select id="ageAtDeath" name="ageAtDeath">
+                    <option value="">--Select--</option>
+                    <option value="N">Newborn</option>
+                    <option value="IN">Infant</option>
+                    <option value="C">Child</option>
+                    <option value="A">Adult</option>
+                    <option value="">Unknown</option>
+                </select><br />
+
+                <label for="headDirection">Head Direction:</label>
+                <select id="headDirection" name="headDirection">
+                    <option value="">--Select--</option>
+                    <option value="W">West</option>
+                    <option value="E">East</option>
+                </select><br />
+                <br />
+
+                <label for="textileColor">Textile Color:</label>
+                <input type="text" id="textileColor" name="textileColor">
+
+                <label for="textileStructure">Textile Structure:</label>
+                <input type="text" id="textileStructure" name="textileStructure">
+
+                <label for="burialDepth">Burial Depth:</label>
+                <input type="text" id="burialDepth" name="burialDepth">
 
                 <label for="estimated-stature">Estimated Stature:</label>
-                <input type="number" id="estimated-stature" name="estimated-stature">
+                <input type="text" id="estimatedStature" name="estimatedStature">
 
-                <label for="age-at-death">Age at Death:</label>
-                <input type="number" id="age-at-death" name="age-at-death">
+                <label for="burialId">Burial ID:</label>
+                <input type="text" id="burialId" name="burialId">
 
-                <label for="head-direction">Head Direction:</label>
-                <input type="text" id="head-direction" name="head-direction">
+                <label for="textileFunction">Textile Function:</label>
+                <input type="text" id="textileFunction" name="textileFunction">
 
-                <label for="burial-id">Burial ID:</label>
-                <input type="text" id="burial-id" name="burial-id">
 
-                <label for="textile-function">Textile Function:</label>
-                <input type="text" id="textile-function" name="textile-function">
-
-                <label for="hair-color">Hair Color:</label>
-                <input type="text" id="hair-color" name="hair-color">
                 <br /><br />
                 <button type="submit">Filter</button>
             </form>
