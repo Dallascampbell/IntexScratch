@@ -219,5 +219,12 @@ namespace IntexScratch.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult IndividualBurial(long id)
+        {
+            var burial = _context.Burialmain.First(x => x.Id == id);
+
+            return View(burial);
+        }
     }
 }
