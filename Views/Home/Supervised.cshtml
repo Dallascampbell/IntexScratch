@@ -1,0 +1,152 @@
+﻿
+@model IntexScratch.Models.ViewModels.SupervisedResponse
+
+<div class="text-center">
+    <h2>Predict the head direction of a mummy here!</h2>
+</div>
+
+<form id="supervisedform" method="post" asp-controller="Inference" asp-action="Score">
+    <div asp-validation-summary="All" class="text-warning"></div>
+
+    <div class="form-group">
+        <label for="squarenorthsouth">Square North South</label>
+        <input type="number" id="squarenorthsouth" name="squarenorthsouth" />
+    </div>
+
+    <div class="form-group">
+        <label for="depth">Depth</label>
+        <input type="number" id="depth" name="depth" />
+    </div>
+
+    <div class="form-group">
+        <label for="southtohead">South to Head</label>
+        <input type="number" id="southtohead" name="southtohead" />
+    </div>
+
+    <div class="form-group">
+        <label for="squareeastwest">Square East West</label>
+        <input type="number" id="squareeastwest" name="squareeastwest" />
+    </div>
+
+    <div class="form-group">
+        <label for="westtohead">West to Head</label>
+        <input type="number" id="westtohead" name="westtohead" />
+    </div>
+
+    <div class="form-group">
+        <label for="westtofeet">West to Feet</label>
+        <input type="number" id="westtofeet" name="westtofeet" />
+    </div>
+
+    <div class="form-group">
+        <label for="southtofeet">South to Feet</label>
+        <input type="number" id="southtofeet" name="southtofeet" />
+    </div>
+
+    <div class="form-group">
+        <label for="northsouth">North South:</label>
+        <select id="northsouth">
+            <option value=0>South</option>
+            <option value=1>North</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="eastweste">East West:</label>
+        <select id="eastweste">
+            <option value="0">West</option>
+            <option value="1">East</option>
+        </select>
+        <input type="hidden" for="eastwestw" id="eastwestw" value="0" />
+    </div>
+
+    <div class="form-group">
+        <label for="adultsubadult">Adult or Child:</label>
+        <select id="adultsubadult">
+            <option value="0">Child</option>
+            <option value="1">Adult</option>
+        </select>
+        <input type="hidden" for="childsubchild" id="childsubchild" value="0" />
+    </div>
+
+    <div class="form-group">
+        <label for="preservation">Preservation:</label>
+        <select id="preservation">
+            <option value="1">Wrapped</option>
+            <option value="2">Well Preserved</option>
+            <option value="3">Fair</option>
+            <option value="4">Poorly Preserved</option>
+            <option value="5">Badly Preserved</option>
+            <option value="6">Skeleton</option>
+            <option value="7">Deteriorated</option>
+        </select>
+        <input type="hidden" for="well" id="well" value="0" />
+        <input type="hidden" for="fair" id="fair" value="0" />
+        <input type="hidden" for="poorly" id="poorly" value="0" />
+        <input type="hidden" for="badly" id="badly" value="0" />
+        <input type="hidden" for="skeleton" id="skeleton" value="0" />
+        <input type="hidden" for="deteriorated" id="deteriorated" value="0" />
+    </div>
+
+    <div class="form-group">
+        <label for="wrapping">Wrapping:</label>
+        <select id="wrapping">
+            <option value="1">Whole</option>
+            <option value="2">Partial</option>
+            <option value="3">Bones</option>
+        </select>
+        <input type="hidden" for="partial" id="partial" value="0" />
+        <input type="hidden" for="bones" id="bones" value="0" />
+    </div>
+
+    <div class="form-group">
+        <label for="haircolor">Hair Color:</label>
+        <select id="haircolor">
+            <option value="1">Brown/Dark Brown/Lt Brown</option>
+            <option value="2">Black</option>
+            <option value="3">Brown-Red</option>
+            <option value="4">Red</option>
+            <option value="5">Blond</option>
+        </select>
+        <input type="hidden" for="black" id="black" value="0" />
+        <input type="hidden" for="brownred" id="brownred" value="0" />
+        <input type="hidden" for="red" id="red" value="0" />
+        <input type="hidden" for="blond" id="blond" value="0" />
+    </div>
+
+    <div class="form-group">
+        <label for="area">Area:</label>
+        <select id="area">
+            <option value="1">Northeast</option>
+            <option value="2">Northwest</option>
+            <option value="3">Southeast</option>
+            <option value="4">Southwest</option>
+        </select>
+        <input type="hidden" for="nnw" id="nnw" value="0" />
+        <input type="hidden" for="nw" id="nw" value="0" />
+        <input type="hidden" for="se" id="se" value="0" />
+        <input type="hidden" for="sw" id="sw" value="0" />
+    </div>
+
+    <div class="form-group">
+        <label for="ageatdeath">Age at Death:</label>
+        <select id="ageatdeath">
+            <option value="1">Adult (15+ years)</option>
+            <option value="2">Child (3-15 years)</option>
+            <option value="3">Infant (1-3 years)</option>
+            <option value="4">Newborn (0-1 years)</option>
+        </select>
+        <input type="hidden" for="child" id="child" value="0" />
+        <input type="hidden" for="infant" id="infant" value="0" />
+        <input type="hidden" for="newborn" id="newborn" value="0" />
+    </div>
+
+    <div class="float-end">
+        <input id="predictionBtn"class="btn btn-primary" type="button" value="Make My Prediction" />
+    </div>
+</form>
+
+<div>
+    <script src="~/js/site.js"></script>
+</div>
+
