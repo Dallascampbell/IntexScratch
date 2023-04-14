@@ -43,6 +43,12 @@ namespace IntexScratch.Infrastructure
 
             int startPage = Math.Max(1, PageModel.CurrentPage - MaxPagesToShow / 2);
             int endPage = Math.Min(PageModel.TotalPages, startPage + MaxPagesToShow - 1);
+            string sex = PageModel.Sex;
+            string id = PageModel.id;
+            string textilecolor = PageModel.TextileColor;
+            string headdirection = PageModel.HeadDirection;
+            string age = PageModel.Age;
+            string haircolor = PageModel.HairColor;
 
             if (startPage > 1)
             {
@@ -75,13 +81,21 @@ namespace IntexScratch.Infrastructure
             tho.Content.AppendHtml(final.InnerHtml);
         }
 
+
         private const int MaxPagesToShow = 5;
 
         private TagBuilder GeneratePageLink(IUrlHelper uh, int pageNumber, string text = null)
         {
             TagBuilder tb = new TagBuilder("a");
-
-            tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = pageNumber });
+            int startPage = Math.Max(1, PageModel.CurrentPage - MaxPagesToShow / 2);
+            int endPage = Math.Min(PageModel.TotalPages, startPage + MaxPagesToShow - 1);
+            string sex = PageModel.Sex;
+            string id = PageModel.id;
+            string textilecolor = PageModel.TextileColor;
+            string headdirection = PageModel.HeadDirection;
+            string age = PageModel.Age;
+            string haircolor = PageModel.HairColor;
+            tb.Attributes["href"] = uh.Action(PageAction, new {id = id, sex = sex, textilecolor = textilecolor, headdirection = headdirection, age = age, haircolor = haircolor, pageNum = pageNumber });
 
             if (PageClassesEnabled)
             {

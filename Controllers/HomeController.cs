@@ -165,7 +165,14 @@ namespace IntexScratch.Controllers
                 {
                     TotalNumBurials = query.Count(),
                     BurialsPerPage = pageSize,
-                    CurrentPage = pageNum
+                    CurrentPage = pageNum,
+     
+                    Sex = sex,
+                    id = burialId,
+                    HeadDirection = headDirection,
+                    Age = ageAtDeath,
+                    TextileColor = textileColor,
+                    HairColor = hairColor
                 }
             };
 
