@@ -42,11 +42,6 @@ namespace IntexScratch
                 new InferenceSession("wwwroot/Model/decisiontreemod.onnx"));
         
 
-            //services.AddHttpsRedirection(options =>
-            //{
-            //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-            //    options.HttpsPort = 44360;
-            //});
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -103,9 +98,6 @@ namespace IntexScratch
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseHsts();
-            //var options = new RewriteOptions()
-            //.AddRedirectToHttps(StatusCodes.Status301MovedPermanently, 443);
-            //app.UseRewriter(options);
 
             if (env.IsDevelopment())
             {
@@ -129,13 +121,7 @@ namespace IntexScratch
            
             app.UseAuthentication();
             app.UseAuthorization();
-                            
-            //app.Use(async (context, next) =>
-            //{
-            //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; cookie-src 'self'");
-            //    await next();
-            //});
-
+                           
             app.UseCookiePolicy();
 
 
