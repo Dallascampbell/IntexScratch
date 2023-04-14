@@ -51,6 +51,8 @@ namespace IntexScratch.Controllers
 
             if (ModelState.IsValid) //if Vlaid
             {
+                var rowCount = _context.Burialmain.Count();
+                b.Id = rowCount;
                 _context.Add(b);
                 _context.SaveChanges();
 
