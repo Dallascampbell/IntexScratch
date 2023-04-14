@@ -220,6 +220,7 @@ namespace IntexScratch.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult IndividualBurial(long id)
         {
             var burial = _context.Burialmain.First(x => x.Id == id);
