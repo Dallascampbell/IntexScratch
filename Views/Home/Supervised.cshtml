@@ -451,6 +451,9 @@
             // convert the response to a string, parse it, and print the response value (East or West) to the side of the form
 
             var responseString = await response.text();
+            if (responseString == "undefined") {
+                responseString = "The head direction could not be determined";
+            }
 
             responseString = JSON.parse(responseString);
             document.getElementById("responseHead").innerHTML = responseString.predictedValue;
