@@ -18,14 +18,22 @@
         <div class="form-group row">
             <label asp-for="Headdirection" class="col-sm-2 col-form-label">Headdirection:</label>
             <div class="col-sm-4">
-                <input asp-for="Headdirection" class="form-control">
+                <select asp-for="Headdirection" class="form-control">
+                    <option value="">--Select--</option>
+                    <option value="W">West</option>
+                    <option value="E">East</option>
+                </select>
             </div>
         </div>
 
         <div class="form-group row">
             <label asp-for="Sex" class="col-sm-2 col-form-label">Sex:</label>
             <div class="col-sm-4">
-                <input asp-for="Sex" class="form-control">
+                <select asp-for="Sex" class="form-control">
+                    <option value="">--Select--</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
             </div>
         </div>
 
@@ -51,13 +59,6 @@
         </div>
 
         <div class="form-group row">
-            <label asp-for="Adultsubadult" class="col-sm-2 col-form-label">Adultsubadult:</label>
-            <div class="col-sm-4">
-                <input asp-for="Adultsubadult" class="form-control">
-            </div>
-        </div>
-
-        <div class="form-group row">
             <label asp-for="Southtohead" class="col-sm-2 col-form-label">Southtohead:</label>
             <div class="col-sm-4">
                 <input asp-for="Southtohead" class="form-control">
@@ -67,8 +68,18 @@
         <div class="form-group row">
             <label asp-for="Preservation" class="col-sm-2 col-form-label">Preservation:</label>
             <div class="col-sm-4">
-                <input asp-for="Preservation" class="form-control">
+                <select asp-for="Preservation" class="form-control">
+                    <option value="">--Select--</option>
+                    <option value="Skeleton">Skeleton</option>
+                    <option value="Well preserved">Well preserved</option>
+                    <option value="Wrapped">Wrapped</option>
+                    <option value="Badly preserved">Badly preserved</option>
+                    <option value="Poorly preserved">Poorly preserved</option>
+                    <option value="Deteriorated">Deteriorated</option>
+                    <option value="">Unknown</option>
+                </select>
             </div>
+
         </div>
 
         <div class="form-group row">
@@ -123,7 +134,14 @@
         <div class="form-group row">
             <label asp-for="Ageatdeath" class="col-sm-2 col-form-label">Ageatdeath:</label>
             <div class="col-sm-4">
-                <input asp-for="Ageatdeath" class="form-control">
+                <select asp-for="Ageatdeath" class="form-control">
+                    <option value="">--Select--</option>
+                    <option value="N">Newborn</option>
+                    <option value="IN">Infant</option>
+                    <option value="C">Child</option>
+                    <option value="A">Adult</option>
+                    <option value="">Unknown</option>
+                </select>
             </div>
         </div>
 
@@ -133,6 +151,10 @@
                 <input asp-for="Southtofeet" class="form-control">
             </div>
         </div>
+        <br />
+        <p class="alert alert-warning">
+            Leaving a value as "--Select--" will leave the value blank
+        </p>
 
         <button type="submit" class="btn btn-primary">Submit Record</button>
     </form>
